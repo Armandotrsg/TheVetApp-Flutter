@@ -25,23 +25,34 @@ class HomeScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
-          }
-          return ListView.builder(
+          } else if (snapshot.data?.docs.isEmpty ?? true) {
+            return const Center(child: Text('No animals found'));
+          } else {
+            return ListView.builder(
             itemCount: snapshot.data?.docs.length,
             itemBuilder: (context, index) {
               DocumentSnapshot data = snapshot.data!.docs[index];
               return Card(
                 child: ListTile(
+                  leading: const Icon(Icons.pets),
                   title: Text(data['name']),
-                  subtitle: Text(data['age']),
+                  subtitle: Text("Age: ${data['age']}; Weight: ${data['weight']}"),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      FirebaseFirestore.instance.collection('animals').doc(data.id).delete();
+                    },
+                  ),
                 ),
               );
             },
           );
+          }
+          
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, Routes.addPet),
         backgroundColor: Colors.deepPurple,
         child: const Icon(
           Icons.add,

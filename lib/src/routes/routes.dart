@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_vet_app/src/pages/add_animal.dart';
 import 'package:the_vet_app/src/pages/home_screen.dart';
 import 'package:the_vet_app/src/pages/user_profile.dart';
 
@@ -20,7 +21,7 @@ class Routes {
       case userProfile:
         return buildRoute(const UserProfileScreen());
       case addPet:
-        // return buildRoute(const AddPetScreen());
+        return buildRoute(const AddPetScreen());
       default:
         throw Exception('La ruta: ${settings.name} no existe');
     }
