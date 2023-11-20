@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "236972370773",
+    "project_id": "thevetapp-fd704",
+    "storage_bucket": "thevetapp-fd704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236972370773:android:a63784d80d8e6b015c1ddc",
+        "android_client_info": {
+          "package_name": "com.example.the_vet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236972370773-s2tb7stuutnl2vgn6p2cdrib6p6e6h4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzYlqjKLgl_zdy9M8-8eUFB_qSNwP4oQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236972370773-s2tb7stuutnl2vgn6p2cdrib6p6e6h4p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236972370773:android:b967c01f19b2f4f05c1ddc",
+        "android_client_info": {
+          "package_name": "mx.tec.thevetapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236972370773-l0d14u8ncrf7996m1rng1buc5mfhi4fg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.tec.thevetapp",
+            "certificate_hash": "bbb116ac1b591bd942cfdf3d4e8f2c3056d8d446"
+          }
+        },
+        {
+          "client_id": "236972370773-s2tb7stuutnl2vgn6p2cdrib6p6e6h4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzYlqjKLgl_zdy9M8-8eUFB_qSNwP4oQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236972370773-s2tb7stuutnl2vgn6p2cdrib6p6e6h4p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
