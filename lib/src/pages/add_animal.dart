@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddPetScreen extends StatefulWidget {
@@ -58,12 +59,23 @@ class _AddPetScreenState extends State<AddPetScreen> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context, {
-                  'name': nameController.text,
-                  'age': ageController.text,
-                  'weight': weightController.text,
-                  'id': widget.id,
-                });
+                if (widget.id != null) {
+                  FirebaseFirestore.instance.collection('animals').doc(widget.id).update({
+                    'name': nameController.text,
+                    'age': ageController.text,
+                    'weight': weightController.text,
+                  });
+                  Navigator.pop(context);
+                } else if (nameController.text.isNotEmpty && ageController.text.isNotEmpty && weightController.text.isNotEmpty) {
+                  FirebaseFirestore.instance.collection('animals').add({
+                    'name': nameController.text,
+                    'age': ageController.text,
+                    'weight': weightController.text,
+                  });
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please fill all the fields')));
+                }
               },
               child: Text(widget.name != null ? 'Edit' : 'Add'),
             ),
