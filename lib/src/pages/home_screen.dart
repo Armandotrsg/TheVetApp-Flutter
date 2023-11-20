@@ -28,25 +28,47 @@ class HomeScreen extends StatelessWidget {
           } else if (snapshot.data?.docs.isEmpty ?? true) {
             return const Center(child: Text('No animals found'));
           } else {
-            return ListView.builder(
-            itemCount: snapshot.data?.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot data = snapshot.data!.docs[index];
-              return Card(
-                child: ListTile(
-                  leading: const Icon(Icons.pets),
-                  title: Text(data['name']),
-                  subtitle: Text("Age: ${data['age']}; Weight: ${data['weight']}"),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      FirebaseFirestore.instance.collection('animals').doc(data.id).delete();
-                    },
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+              child: ListView.builder(
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot data = snapshot.data!.docs[index];
+                return Card(
+                  child: ListTile(
+                    leading: const Icon(Icons.pets),
+                    title: Text(data['name']),
+                    subtitle: Text("Age: ${data['age']}; Weight: ${data['weight']}"),
+                    trailing: SizedBox(
+                      width: 100, // Adjust this value as needed
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.editPet, arguments: {
+                                'name': data['name'],
+                                'age': data['age'],
+                                'weight': data['weight'],
+                                'id': data.id,
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              FirebaseFirestore.instance.collection('animals').doc(data.id).delete();
+                            },
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              );
-            },
-          );
+                );
+              },
+                      ),
+            );
           }
           
         },
