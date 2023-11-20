@@ -60,21 +60,37 @@ class _AddPetScreenState extends State<AddPetScreen> {
             ElevatedButton(
               onPressed: () {
                 if (widget.id != null) {
-                  FirebaseFirestore.instance.collection('animals').doc(widget.id).update({
+                  FirebaseFirestore.instance
+                      .collection('animals')
+                      .doc(widget.id)
+                      .update({
                     'name': nameController.text,
                     'age': ageController.text,
                     'weight': weightController.text,
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Animal updated'),
+                    backgroundColor: Colors.green,
+                  ));
                   Navigator.pop(context);
-                } else if (nameController.text.isNotEmpty && ageController.text.isNotEmpty && weightController.text.isNotEmpty) {
+                } else if (nameController.text.isNotEmpty &&
+                    ageController.text.isNotEmpty &&
+                    weightController.text.isNotEmpty) {
                   FirebaseFirestore.instance.collection('animals').add({
                     'name': nameController.text,
                     'age': ageController.text,
                     'weight': weightController.text,
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Animal added'),
+                    backgroundColor: Colors.green,
+                  ));
                   Navigator.pop(context);
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please fill all the fields')));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Please fill all the fields'),
+                    backgroundColor: Colors.red,
+                  ));
                 }
               },
               child: Text(widget.name != null ? 'Edit' : 'Add'),
