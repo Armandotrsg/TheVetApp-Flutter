@@ -16,6 +16,10 @@ class UserProfileScreen extends StatelessWidget {
           Navigator.of(context).pop();
         })
       ],
+      children: const [
+        Divider(),
+        Text("App made by Armando Terrazas and Jorge Wolburg")
+      ],
     );
   }
 }
