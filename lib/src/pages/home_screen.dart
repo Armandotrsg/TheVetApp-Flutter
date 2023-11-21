@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:the_vet_app/src/routes/routes.dart';
 
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('animals').snapshots(),
+        stream: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('animals').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                           IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
-                              FirebaseFirestore.instance.collection('animals').doc(data.id).delete();
+                              FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('animals').doc(data.id).delete();
                             },
                             color: Colors.red,
                           ),

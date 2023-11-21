@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AddPetScreen extends StatefulWidget {
@@ -61,6 +62,8 @@ class _AddPetScreenState extends State<AddPetScreen> {
               onPressed: () {
                 if (widget.id != null) {
                   FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
                       .collection('animals')
                       .doc(widget.id)
                       .update({
@@ -76,7 +79,11 @@ class _AddPetScreenState extends State<AddPetScreen> {
                 } else if (nameController.text.isNotEmpty &&
                     ageController.text.isNotEmpty &&
                     weightController.text.isNotEmpty) {
-                  FirebaseFirestore.instance.collection('animals').add({
+                  FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .collection('animals')
+                      .add({
                     'name': nameController.text,
                     'age': ageController.text,
                     'weight': weightController.text,
